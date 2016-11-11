@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<package>
+  <name>ros_agv</name>
+  <version>0.0.0</version>
+  <description>The ros_agv package</description>
+
+  <maintainer email="mihir.s456@gmail.com">Mihir</maintainer>
+
+  <license>TODO</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  <build_depend>ros_agv_base</build_depend>
+  <build_depend>ros_agv_bringup</build_depend>
+  <build_depend>ros_agv_desc</build_depend>
+  <build_depend>ros_agv_simulation</build_depend>
+  <run_depend>ros_agv_base</run_depend>
+  <run_depend>ros_agv_bringup</run_depend>
+  <run_depend>ros_agv_desc</run_depend>
+  <run_depend>ros_agv_simulation</run_depend>
+
+  <export>
+
+  </export>
+</package>
