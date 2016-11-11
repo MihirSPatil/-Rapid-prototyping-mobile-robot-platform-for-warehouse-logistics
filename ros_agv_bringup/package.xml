@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<package>
+  <name>ros_agv_bringup</name>
+  <version>0.0.0</version>
+  <description>The ros_agv_bringup package</description>
+
+  <maintainer email="mihir.s456@gmail.com">Mihir</maintainer>
+
+  <license>TODO</license>
+<buildtool_depend>catkin</buildtool_depend>
+
+  <export>
+
+  </export>
+</package>
