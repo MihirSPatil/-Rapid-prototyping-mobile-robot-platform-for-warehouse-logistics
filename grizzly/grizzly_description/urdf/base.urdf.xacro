@@ -1,0 +1,175 @@
+<?xml version="1.0"?>
+<!--
+Copyright (c) 2012, Siddhant Ahuja (Sid), Ryan Gariepy
+Copyright (c) 2014, Clearpath Robotics
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:
+    * Redistributions of source code must retain the above copyright
+      notice, this list of conditions and the following disclaimer.
+    * Redistributions in binary form must reproduce the above copyright
+      notice, this list of conditions and the following disclaimer in the
+      documentation and/or other materials provided with the distribution.
+    * Neither the name of Clearpath Robotics nor the
+      names of its contributors may be used to endorse or promote products
+      derived from this software without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDERS BE LIABLE FOR ANY
+DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+This program contains the description of the robot base model for the Clearpath Grizzly
+-->
+
+<robot name="grizzly" xmlns:xacro="http://www.ros.org/wiki/xacro">
+  <property name="M_PI" value="3.1415926535897931" />
+  <property name="ground_clearance" value="0.203" />
+
+  <!-- Included URDF/XACRO Files -->
+  <xacro:include filename="$(find grizzly_description)/urdf/materials.urdf.xacro" />
+  <xacro:include filename="$(find grizzly_description)/urdf/wheel.urdf.xacro" />
+  <xacro:include filename="$(find grizzly_description)/urdf/grizzly.gazebo" />
+
+  <!-- Key Dimensions -->
+  <property name="chassis_length" value="1.75" />  
+  <property name="chassis_width" value="0.711" /> 
+  <property name="chassis_height" value="0.495" /> 
+  <property name="chassis_mass" value="487" />
+  <property name="front_axle_mass" value="113" />
+  <property name="front_axle_radius" value="0.13" />
+  <property name="front_axle_length" value="1.0" />
+  <property name="base_x_origin_to_wheel_origin" value="0.448" /> <!-- 240/2 + 660/2-->
+  <property name="base_y_origin_to_wheel_origin" value="0.499" /> <!--(1282-711)/4 + 711/2--> 
+  <property name="base_z_origin_to_wheel_origin" value="0.0" />
+
+  <!-- Root link of Grizzly -->
+  <link name="base_link" />
+
+  <!-- Actual body/chassis of the robot, separate from base_link due to KDL inertia issue. -->
+  <link name="chassis_link">
+    <inertial>
+      <mass value="${chassis_mass}"/>
+      <origin xyz="-0.013 -0.00061 -0.0205"/>
+      <inertia ixx="64.010712692" ixy="0.214224647" ixz="-1.636784296"
+               iyy="200.87" iyz="-0.048325439" izz="229.831441333" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 ${ground_clearance}"
+              rpy="${M_PI/2} 0 ${M_PI/2}" />
+      <geometry>
+        <mesh filename="package://grizzly_description/meshes/base_link.stl" />
+      </geometry>
+      <material name="DarkGrey" />
+    </visual>
+    <collision>
+      <origin xyz="0 0 ${ground_clearance}"
+              rpy="${M_PI/2} 0 ${M_PI/2}" />
+      <geometry>
+         <box size="${chassis_width} ${chassis_height} ${chassis_length}" />
+      </geometry>
+    </collision>
+  </link>
+  <joint name="chassis_joint"
+         type="fixed">
+    <origin xyz="0 0 ${ground_clearance}"
+            rpy="0 0 0"/>
+    <parent link="base_link" />
+    <child link="chassis_link" />
+  </joint>
+
+  <!-- Add a sensor anchor link that points to the center of the robot top plate -->
+  <link name="sensor_anchor_link"/>
+  <joint name="sensor_anchor_joint" type="fixed">
+    <origin xyz="0 0 ${chassis_height}"
+            rpy="0 0 0" />
+    <parent link="chassis_link" />
+    <child link="sensor_anchor_link" />
+  </joint>
+
+  <!-- This is the approximate position of the GPS antenna on the standard configuration. -->
+  <link name="navsat_link" />
+  <joint name="navsat_joint" type="fixed">
+    <origin xyz="-${chassis_length/2} 0 0"
+            rpy="0 0 0" />
+    <parent link="sensor_anchor_link" />
+    <child link="navsat_link" />
+  </joint>
+
+  <!-- The position and orientation of the IMU in the rear compartment. -->
+  <link name="imu_link" />
+  <joint name="imu_joint" type="fixed">
+    <origin xyz="-${chassis_length/2} 0 -${chassis_height/2}"
+             rpy="${M_PI} ${M_PI/2} 0" />
+    <parent link="sensor_anchor_link" />
+    <child link="imu_link" />
+  </joint>
+
+  <!-- Purely decorative visual component. -->
+  <link name="fenders_link">
+    <visual>
+      <origin xyz="0 0 ${ground_clearance}" rpy="${M_PI/2} 0 ${M_PI/2}"/>
+      <geometry>
+        <mesh filename="package://grizzly_description/meshes/bumper.stl" />
+      </geometry>
+      <material name="Yellow" />
+    </visual>
+  </link>
+  <joint name="fenders_joint" type="fixed">
+    <parent link="chassis_link" />
+    <child link="fenders_link" />
+  </joint>
+
+  <link name="front_axle_link">
+    <inertial>
+      <mass value="${front_axle_mass}" />
+      <origin xyz="0 0 0"/>
+      <inertia ixx="9.9" ixy="0.0" ixz="0.0" iyy="9.9" iyz="0.0" izz="0.95" />
+    </inertial>
+    <visual>
+      <origin xyz="-${ground_clearance} 0 ${base_y_origin_to_wheel_origin}"
+              rpy="0 ${M_PI} ${M_PI/2}" />
+      <geometry>
+        <mesh filename="package://grizzly_description/meshes/front_axle.stl" />
+      </geometry>
+      <material name="DarkGrey" />
+    </visual>
+    <collision>
+      <origin xyz="0 0 0"
+              rpy="${M_PI/2} 0 0" />
+      <geometry>
+        <cylinder length="${front_axle_length}"
+                  radius="${front_axle_radius}" />
+      </geometry>
+    </collision>
+  </link>
+  <joint name="front_axle_joint"
+         type="revolute">
+    <origin xyz="${base_x_origin_to_wheel_origin} 0 0"
+            rpy="0 0 0" />
+    <parent link="chassis_link" />
+    <child link="front_axle_link" />
+    <axis xyz="1 0 0"
+          rpy="0 0 0" />
+    <limit effort="10"
+           lower="-0.2"
+           upper="0.2"
+           velocity="0.5" />
+  </joint>
+
+  <grizzly_wheel fr="front" lr="left" parent="front_axle_link"
+                 translateX="0" translateY="1" flipY="0" />
+  <grizzly_wheel fr="front" lr="right" parent="front_axle_link"
+                 translateX="0" translateY="-1" flipY="1" />
+  <grizzly_wheel fr="rear" lr="left" parent="chassis_link"
+                 translateX="-1" translateY="1" flipY="0" />
+  <grizzly_wheel fr="rear" lr="right" parent="chassis_link"
+                 translateX="-1" translateY="-1" flipY="1" />
+</robot>

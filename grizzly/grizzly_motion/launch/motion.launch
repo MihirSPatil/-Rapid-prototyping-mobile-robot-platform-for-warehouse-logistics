@@ -1,0 +1,12 @@
+<launch>
+  <rosparam>
+    vehicle_width: 1.01      # meters
+    wheel_radius: 0.333      # meters
+    max_acceleration: 1.5    # meters / s^2
+  </rosparam>
+
+  <arg name="simulate" default="false" />
+  <node pkg="grizzly_motion" type="motion_generator" name="grizzly_motion_generator" />
+  <node pkg="grizzly_motion" type="motion_safety" name="grizzly_motion_safety" unless="$(arg simulate)"/>
+  <!-- <node pkg="grizzly_motion" type="dead_reckoning" name="grizzly_dead_reckoning" /> -->
+</launch>

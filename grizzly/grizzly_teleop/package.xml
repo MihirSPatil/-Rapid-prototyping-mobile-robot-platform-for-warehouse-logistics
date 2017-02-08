@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<package>
+  <name>grizzly_teleop</name>
+  <version>0.3.2</version>
+  <description>Nodes to republish joystick messages as a cmd_vel topic suitable for use with real or simulated Grizzly.</description>
+
+  <maintainer email="rgariepy@clearpathrobotics.com">Ryan Gariepy</maintainer>
+  <author>Ryan Gariepy</author>
+
+  <license>BSD</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  <build_depend>libusb-dev</build_depend>
+  <run_depend>rospy</run_depend>
+  <run_depend>geometry_msgs</run_depend>
+  <run_depend>grizzly_msgs</run_depend>
+  <run_depend>sensor_msgs</run_depend>
+  <run_depend>joy</run_depend>
+  
+  <export>
+  </export>
+</package>

@@ -1,0 +1,96 @@
+<?xml version="1.0"?>
+<!--
+Copyright (c) 2012, Siddhant Ahuja (Sid)
+Copyright (c) 2014, Clearpath Robotics
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:
+    * Redistributions of source code must retain the above copyright
+      notice, this list of conditions and the following disclaimer.
+    * Redistributions in binary form must reproduce the above copyright
+      notice, this list of conditions and the following disclaimer in the
+      documentation and/or other materials provided with the distribution.
+    * Neither the name of Clearpath Robotics nor the
+      names of its contributors may be used to endorse or promote products
+      derived from this software without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDERS BE LIABLE FOR ANY
+DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+This program contains the description of the robot wheel model for Clearpath Grizzly
+-->
+<robot name="grizzly_wheel" xmlns:xacro="http://ros.org/wiki/xacro">
+  <property name="wheel_mass" value="15" />
+  <property name="wheel_radius" value="0.33" />
+  <property name="wheel_width" value="0.252" />
+
+  <xacro:macro name="grizzly_wheel"
+               params="fr lr parent translateX translateY flipY">
+    <!--fr : front, rear ; lr: left, right -->
+    <link name="${fr}_${lr}_wheel">
+      <inertial>
+        <mass value="${wheel_mass}" />
+        <origin xyz="-0.002 -0.198 0.003" />
+        <inertia ixx="14.68" ixy="-0.033" ixz="0.07"
+                 iyy="26.7" iyz="-0.05" izz="14.68" />
+      </inertial>
+      <visual>
+        <origin xyz="0 0 0"
+                rpy="${M_PI/2} ${flipY*M_PI} ${M_PI/2}" />
+        <geometry>
+          <mesh filename="package://grizzly_description/meshes/wheel.stl" />
+        </geometry>
+        <material name="Grey" />
+      </visual>
+      <collision>
+        <origin xyz="0 0 0"
+                rpy="${M_PI/2} ${flipY*M_PI} 0" />
+        <geometry>
+          <cylinder length="${wheel_width}"
+                    radius="${wheel_radius}" />
+        </geometry>
+      </collision>
+    </link>
+    <gazebo reference="${fr}_${lr}_wheel">
+      <mu1 value="1.0" />
+      <mu2 value="1.0" />
+      <kp value="10000000.0" />
+      <kd value="1.0" />
+      <fdir1 value="1 0 0" />
+      <material>Gazebo/Grey</material>
+      <turnGravityOff>false</turnGravityOff>
+      <selfCollide>true</selfCollide>
+    </gazebo>
+    <joint name="joint_${fr}_${lr}_wheel"
+           type="continuous">
+      <parent link="${parent}" />
+      <child link="${fr}_${lr}_wheel" />
+      <origin xyz="${translateX * base_x_origin_to_wheel_origin} ${translateY * base_y_origin_to_wheel_origin} 0"
+              rpy="0 0 0" />
+      <axis xyz="0 1 0"
+            rpy="0 0 0" />
+      <limit effort="100"
+             velocity="100" />
+      <joint_properties damping="0.0"
+                        friction="0.0" />
+    </joint>
+    <!-- Transmission links the joints and the controller -->
+<!--     <transmission name="joint_${fr}_${lr}_wheel_trans"
+                  type="SimpleTransmission">
+      <actuator name="joint_${fr}_${lr}_wheel_motor" >
+          <mechanicalReduction>1</mechanicalReduction>
+          <motorTorqueConstant>1</motorTorqueConstant>
+      </actuator>
+      <joint name="joint_${fr}_${lr}_wheel" />
+    </transmission> -->
+  </xacro:macro>
+</robot>

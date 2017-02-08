@@ -1,0 +1,91 @@
+#!/usr/bin/env python
+#
+# Software License Agreement (BSD) 
+#
+# @author    Ryan Gariepy <rgariepy@clearpathrobotics.com>
+# @copyright (c) 2013, Clearpath Robotics, Inc., All rights reserved.
+#
+# Redistribution and use in source and binary forms, with or without modification, are permitted provided that the
+# following conditions are met:
+# * Redistributions of source code must retain the above copyright notice, this list of conditions and the following
+#   disclaimer.
+# * Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following
+#   disclaimer in the documentation and/or other materials provided with the distribution.
+# * Neither the name of Clearpath Robotics nor the names of its contributors may be used to endorse or promote products
+#   derived from this software without specific prior written permission.
+#
+# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES,
+# INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+# DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+# SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+# SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+# WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+# OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+""" If we're using the usual Logitech gamepad, suggest using "X" mode
+via the switch on the front. That will map the buttons to "Green=GO, 
+Red=E-Stop"""
+
+import rospy
+
+from sensor_msgs.msg import Joy
+from geometry_msgs.msg import Twist
+from std_msgs.msg import Bool
+
+class Teleop:
+    def __init__(self):
+        rospy.init_node('grizzly_teleop')
+
+        self.turn_scale = rospy.get_param('~turn_scale')
+        self.drive_scale = rospy.get_param('~drive_scale')
+        self.slow_scale = rospy.get_param('~slow_scale',10.0)
+        self.deadman_button = rospy.get_param('~deadman_button', 0)
+        self.fast_button = rospy.get_param('~fast_button', 1)
+        self.estop_button = rospy.get_param('~estop_button', 2)
+        self.estop_button2 = rospy.get_param('~estop_button2', 3)
+        self.fwd_axis = rospy.get_param('~fwd_axis', 1)
+        self.turn_axis = rospy.get_param('~turn_axis', 0)
+
+        self.cmd = None
+        cmd_pub = rospy.Publisher('cmd_vel', Twist, queue_size=1)
+        self.estop = False
+        cmd_estop = rospy.Publisher('estop', Bool, queue_size=1)
+
+        rospy.Subscriber("joy", Joy, self.callback)
+        rate = rospy.Rate(rospy.get_param('~hz', 20))
+        
+        while not rospy.is_shutdown():
+            rate.sleep()
+            if self.cmd:
+                cmd_pub.publish(self.cmd)
+            """ As long as we're active, give it e-stop data
+            A manual reset is required once an e-stop is asserted
+            anyway, and having to reset everytime we let go of the
+            joystick isn't the point """
+            cmd_estop.publish(self.estop)
+        
+
+    def callback(self, data):
+        """ Receive joystick data, formulate Twist message. """
+        cmd = Twist()
+
+        if data.buttons[self.deadman_button] == 1:
+            cmd.linear.x = data.axes[self.fwd_axis] * self.drive_scale / self.slow_scale
+            cmd.angular.z = data.axes[self.turn_axis] * self.turn_scale / self.slow_scale
+            self.cmd = cmd
+        # Only allow fast motion when the regular deadman isn't pressed
+        # Pressing both will result in slow motion
+        elif data.buttons[self.fast_button] == 1:
+            cmd.linear.x = data.axes[self.fwd_axis] * self.drive_scale
+            cmd.angular.z = data.axes[self.turn_axis] * self.turn_scale 
+            self.cmd = cmd
+        else:
+            self.cmd = None
+        if data.buttons[self.estop_button] == 1 or data.buttons[self.estop_button2] == 1:
+            self.estop = True
+        else:
+            self.estop = False
+
+
+if __name__ == "__main__": 
+    Teleop() 

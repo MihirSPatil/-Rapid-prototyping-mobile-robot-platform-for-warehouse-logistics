@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<package>
+  <name>grizzly_motion</name>
+  <version>0.3.2</version>
+  <description>Low-level motion control nodes for Grizzly which are common to simulated and non-simulated Grizzly.</description>
+
+  <maintainer email="mpurvis@clearpathrobotics.com">Mike Purvis</maintainer>
+
+  <license>BSD</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  <build_depend>cmake_modules</build_depend>
+  <build_depend>diagnostic_updater</build_depend>
+  <build_depend>eigen</build_depend>
+  <build_depend>geometry_msgs</build_depend>
+  <build_depend>grizzly_msgs</build_depend>
+  <build_depend>nav_msgs</build_depend>
+  <build_depend>roboteq_msgs</build_depend>
+  <build_depend>roscpp</build_depend>
+  <build_depend>tf</build_depend>
+  <build_depend>angles</build_depend>
+  <build_depend>nmea_msgs</build_depend>
+  <run_depend>nmea_msgs</run_depend>
+  <run_depend>angles</run_depend>
+  <run_depend>diagnostic_updater</run_depend>
+  <run_depend>geometry_msgs</run_depend>
+  <run_depend>grizzly_msgs</run_depend>
+  <run_depend>nav_msgs</run_depend>
+  <run_depend>roboteq_msgs</run_depend>
+  <run_depend>roscpp</run_depend>
+  <run_depend>tf</run_depend>
+
+  <export>
+  </export>
+</package>

@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<package>
+  <name>grizzly_navigation</name>
+  <version>0.3.2</version>
+  <description>The grizzly_navigation package</description>
+
+  <maintainer email="mpurvis@clearpathrobotics.com">Mike Purvis</maintainer>
+  <license>BSD</license>
+
+  <!-- Use test_depend for packages you need only for testing: -->
+  <buildtool_depend>catkin</buildtool_depend>
+  <build_depend>roslaunch</build_depend>
+  <run_depend>robot_localization</run_depend>
+
+  <!-- The export tag contains other, unspecified, tags -->
+  <export></export>
+</package>
