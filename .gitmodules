@@ -1,3 +1,6 @@
 [submodule "grizzly"]
 	path = grizzly
 	url = https://github.com/g/grizzly.git
+[submodule "grizzly_robot"]
+	path = grizzly_robot
+	url = https://github.com/g/grizzly_robot.git
