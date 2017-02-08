@@ -4,3 +4,25 @@
 [submodule "grizzly_robot"]
 	path = grizzly_robot
 	url = https://github.com/g/grizzly_robot.git
+[submodule "grizzly_simulator"]
+	path = grizzly_simulator
+	url = https://github.com/g/grizzly_simulator.git
+[submodule "nmea_comms"]
+	path = nmea_comms
+	url = https://github.com/ros-drivers/nmea_comms.git
+[submodule "nmea_msgs"]
+	path = nmea_msgs
+	url = https://github.com/ros-drivers/nmea_msgs.git
+[submodule "nmea_navsat_driver"]
+	path = nmea_navsat_driver
+	url = https://github.com/ros-drivers/nmea_navsat_driver.git
+[submodule "roboteq"]
+	path = roboteq
+	url = https://github.com/g/roboteq.git
+[submodule "um6"]
+	path = um6
+	url = https://github.com/ros-drivers/um6.git
+[submodule "robot_upstart"]
+	path = robot_upstart
+	url = https://github.com/clearpathrobotics/robot_upstart.git
+	
