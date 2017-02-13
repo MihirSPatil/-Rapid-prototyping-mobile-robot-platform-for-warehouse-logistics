@@ -1,7 +1,8 @@
 <launch>
-  <node pkg="agv_teleop" type="agv_teleop_node" name="agv_teleop_node">
-    <arg name="scale_angular" value="10" />
-    <arg name="scale_linear" value="10" />
+  <node pkg="agv_teleop" type="agv_teleop_node" name="agv_teleop_node" output="screen">
+    <param name="scale_angular" value="10" />
+    <param name="scale_linear" value="10" />
   </node>
+  <node pkg="agv_teleop" type="teleop_latcher" name="teleop_latcher" />
   <include file="$(find grizzly_gazebo)/launch/grizzly_empty_world.launch"/>
 </launch>
