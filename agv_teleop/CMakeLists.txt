@@ -115,25 +115,14 @@ catkin_package(
 ## Your package locations should be listed before other locations
 include_directories(include ${catkin_INCLUDE_DIRS})
 
-## Declare a C++ library
-# add_library(agv_teleop
-#   src/${PROJECT_NAME}/agv_teleop.cpp
-# )
 
-## Add cmake target dependencies of the library
-## as an example, code may need to be generated before libraries
-## either from message generation or dynamic reconfigure
-# add_dependencies(agv_teleop ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
-
-## Declare a C++ executable
 add_executable(agv_teleop_node src/agv_teleop_node.cpp)
-
-## Add cmake target dependencies of the executable
-## same as for the library above
-#add_dependencies(agv_teleop_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
-
-## Specify libraries to link a library or executable target against
 target_link_libraries(agv_teleop_node
+  ${catkin_LIBRARIES}
+)
+
+add_executable(teleop_latcher src/teleop_latcher.cpp)
+target_link_libraries(teleop_latcher
   ${catkin_LIBRARIES}
 )
 
