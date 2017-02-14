@@ -39,15 +39,15 @@ This program contains the description of the robot base model for the Clearpath 
   <xacro:include filename="$(find grizzly_description)/urdf/grizzly.gazebo" />
 
   <!-- Key Dimensions -->
-  <property name="chassis_length" value="1.75" />  
-  <property name="chassis_width" value="0.711" /> 
-  <property name="chassis_height" value="0.495" /> 
-  <property name="chassis_mass" value="487" />
-  <property name="front_axle_mass" value="113" />
+  <property name="chassis_length" value="1.75" />
+  <property name="chassis_width" value="0.711" />
+  <property name="chassis_height" value="0.495" />
+  <property name="chassis_mass" value="100" />
+  <property name="front_axle_mass" value="50" />
   <property name="front_axle_radius" value="0.13" />
   <property name="front_axle_length" value="1.0" />
   <property name="base_x_origin_to_wheel_origin" value="0.448" /> <!-- 240/2 + 660/2-->
-  <property name="base_y_origin_to_wheel_origin" value="0.499" /> <!--(1282-711)/4 + 711/2--> 
+  <property name="base_y_origin_to_wheel_origin" value="0.499" /> <!--(1282-711)/4 + 711/2-->
   <property name="base_z_origin_to_wheel_origin" value="0.0" />
 
   <!-- Root link of Grizzly -->
@@ -167,9 +167,9 @@ This program contains the description of the robot base model for the Clearpath 
   <grizzly_wheel fr="front" lr="left" parent="front_axle_link"
                  translateX="0" translateY="1" flipY="0" />
   <grizzly_wheel fr="front" lr="right" parent="front_axle_link"
-                 translateX="0" translateY="-1" flipY="1" />
+                 translateX="0" translateY="-1" flipY="0" />
   <grizzly_wheel fr="rear" lr="left" parent="chassis_link"
                  translateX="-1" translateY="1" flipY="0" />
   <grizzly_wheel fr="rear" lr="right" parent="chassis_link"
-                 translateX="-1" translateY="-1" flipY="1" />
+                 translateX="-1" translateY="-1" flipY="0" />
 </robot>
