@@ -41,7 +41,7 @@ This program contains the description of the robot wheel model for Clearpath Gri
         <mass value="${wheel_mass}" />
         <origin xyz="-0.002 -0.198 0.003" />
         <inertia ixx="14.68" ixy="-0.033" ixz="0.07"
-                 iyy="26.7" iyz="-0.05" izz="14.68" />
+                 iyy="0" iyz="-0.05" izz="14.68" />
       </inertial>
       <visual>
         <origin xyz="0 0 0"
@@ -61,8 +61,8 @@ This program contains the description of the robot wheel model for Clearpath Gri
       </collision>
     </link>
     <gazebo reference="${fr}_${lr}_wheel">
-      <mu1 value="1.0" />
-      <mu2 value="1.0" />
+      <mu1 value="1.1" />
+      <mu2 value="1.1" />
       <kp value="10000000.0" />
       <kd value="1.0" />
       <fdir1 value="1 0 0" />
