@@ -31,7 +31,7 @@ This program contains the description of the robot base model for the Clearpath 
 
 <robot name="rambler" xmlns:xacro="http://www.ros.org/wiki/xacro">
   <xacro:property name="M_PI" value="3.1415926535897931" />
-  <xacro:property name="ground_clearance" value="0.05" />
+  <xacro:property name="ground_clearance" value=".06" />
 
   <!-- Included URDF/XACRO Files -->
   <xacro:include filename="$(find agv_description)/urdf/materials.urdf.xacro" />
@@ -45,9 +45,9 @@ This program contains the description of the robot base model for the Clearpath 
   <xacro:property name="base_mass" value="21" />
   <xacro:property name="scale" value="0.001"/>
 
-  <xacro:property name="base_x_origin_to_wheel_origin" value="0.0" />
-  <xacro:property name="base_y_origin_to_wheel_origin" value="0.0" />
-  <xacro:property name="base_z_origin_to_wheel_origin" value="0.0" />
+  <xacro:property name="base_x_origin_to_wheel_origin" value="0.163" /> <!-- 203.2/2 + 500/2-->
+  <xacro:property name="base_y_origin_to_wheel_origin" value="0.25" /> <!--(70)/4 + 440/2-->
+  <xacro:property name="base_z_origin_to_wheel_origin" value="0.1" />
 
   <link name="base_link">
     <inertial>
@@ -61,10 +61,10 @@ This program contains the description of the robot base model for the Clearpath 
       <geometry>
         <mesh filename="package://agv_description/meshes/bot.stl" scale="${scale} ${scale} ${scale}" />
       </geometry>
-      <material name="Red" />
+      <material name="White" />
     </visual>
     <collision>
-      <origin xyz="0 0 0.1125"
+      <origin xyz="0 0 0.06"
               rpy="${M_PI/2} 0 ${M_PI/2}"/>
       <geometry>
          <box size="${base_width} ${base_height} ${base_length}" />
@@ -81,16 +81,8 @@ This program contains the description of the robot base model for the Clearpath 
     <child link="sensor_anchor_link" />
   </joint>
 
-
-
-
-
-  <agv_wheel fr="front" lr="left" parent="base_link"
-                 translateX="0" translateY="1" flipY="0" />
-  <agv_wheel fr="front" lr="right" parent="base_link"
-                 translateX="0" translateY="-1" flipY="1" />
-  <agv_wheel fr="rear" lr="left" parent="base_link"
-                 translateX="-1" translateY="1" flipY="0" />
-  <agv_wheel fr="rear" lr="right" parent="base_link"
-                 translateX="-1" translateY="-1" flipY="1" />
+  <agv_wheel fr="front" lr="left" parent="base_link" translateX="1" translateY="1" flipY="0" />
+  <agv_wheel fr="front" lr="right" parent="base_link" translateX="1" translateY="-1" flipY="1" />
+  <agv_wheel fr="rear" lr="left" parent="base_link" translateX="-1" translateY="1" flipY="0" />
+  <agv_wheel fr="rear" lr="right" parent="base_link" translateX="-1" translateY="-1" flipY="1" />
 </robot>
