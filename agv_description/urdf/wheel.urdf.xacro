@@ -75,7 +75,7 @@ This program contains the description of the robot wheel model for Clearpath Gri
       <origin xyz="${translateX * base_x_origin_to_wheel_origin} ${translateY * base_y_origin_to_wheel_origin} ${base_z_origin_to_wheel_origin}"
               rpy="${M_PI/2} ${flipY*M_PI} ${M_PI/2}" />
 
-      <axis xyz="0 1 0"
+      <axis xyz="1 0 0"
             rpy="0 0 0" />
       <limit effort="100"
              velocity="100" />
