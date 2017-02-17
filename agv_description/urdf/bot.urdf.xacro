@@ -36,7 +36,7 @@ This program contains the description of the robot base model for the Clearpath 
   <!-- Included URDF/XACRO Files -->
   <xacro:include filename="$(find agv_description)/urdf/materials.urdf.xacro" />
   <xacro:include filename="$(find agv_description)/urdf/wheel.urdf.xacro" />
-  <!-- <xacro:include filename="$(find agv_description)/urdf/grizzly.gazebo" /> -->
+  
 
   <!-- Key Dimensions -->
   <xacro:property name="base_length" value="0.491" />
