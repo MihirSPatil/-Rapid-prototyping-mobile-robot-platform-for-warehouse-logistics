@@ -51,7 +51,7 @@ This program contains the description of the robot wheel model for Clearpath Gri
         <material name="Grey" />
       </visual>
       <collision>
-        <origin xyz="0 0 0" rpy="0 0 0" />
+        <origin xyz="0 0 0" rpy="0 0 ${M_PI/2}" />
         <geometry>
           <cylinder length="${wheel_width}"
                     radius="${wheel_radius}" />
