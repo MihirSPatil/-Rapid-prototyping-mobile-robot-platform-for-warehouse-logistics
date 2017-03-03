@@ -36,7 +36,7 @@ This program contains the description of the robot base model for the Clearpath 
   <!-- Included URDF/XACRO Files -->
   <xacro:include filename="$(find agv_description)/urdf/materials.urdf.xacro" />
   <xacro:include filename="$(find agv_description)/urdf/wheel.urdf.xacro" />
-  
+
 
   <!-- Key Dimensions -->
   <xacro:property name="base_length" value="0.491" />
@@ -45,8 +45,8 @@ This program contains the description of the robot base model for the Clearpath 
   <xacro:property name="base_mass" value="21" />
   <xacro:property name="scale" value="0.001"/>
 
-  <xacro:property name="base_x_origin_to_wheel_origin" value="0.163" /> <!-- 203.2/2 + 500/2-->
-  <xacro:property name="base_y_origin_to_wheel_origin" value="0.25" /> <!--(70)/4 + 440/2-->
+  <xacro:property name="base_x_origin_to_wheel_origin" value="0.163" /> <!-- 203.2/2 + 500/2 +/-tolerance -->
+  <xacro:property name="base_y_origin_to_wheel_origin" value="0.25" /> <!--(70)/4 + 440/2 +/-tolerance -->
   <xacro:property name="base_z_origin_to_wheel_origin" value="0.1" />
 
   <link name="base_link">
