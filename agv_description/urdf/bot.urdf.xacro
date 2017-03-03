@@ -61,7 +61,7 @@ This program contains the description of the robot base model for the Clearpath 
       <geometry>
         <mesh filename="package://agv_description/meshes/bot.stl" scale="${scale} ${scale} ${scale}" />
       </geometry>
-      <material name="DarkGrey" />
+      <material name="Grey" />
     </visual>
     <collision>
       <origin xyz="0 0 .123"

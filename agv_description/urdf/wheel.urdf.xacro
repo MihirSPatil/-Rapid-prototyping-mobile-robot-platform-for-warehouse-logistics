@@ -48,7 +48,7 @@ This program contains the description of the robot wheel model for Clearpath Gri
         <geometry>
           <mesh filename="package://agv_description/meshes/wheel1.stl" scale="${scale} ${scale} ${scale}" />
         </geometry>
-        <material name="Grey" />
+        <material name="White" />
       </visual>
       <collision>
         <origin xyz="0 0 0" rpy="0 ${M_PI/2} 0" />
@@ -64,7 +64,7 @@ This program contains the description of the robot wheel model for Clearpath Gri
       <kp value="10000000.0" />
       <kd value="1.0" />
       <fdir1 value="1 0 0" />
-      <material>Gazebo/Grey</material>
+      <material>Gazebo/White</material>
       <turnGravityOff>false</turnGravityOff>
       <selfCollide>true</selfCollide>
     </gazebo>
