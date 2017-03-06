@@ -9,7 +9,7 @@
       <rearRightJoint>joint_rear_right_wheel</rearRightJoint>
       <frontLeftJoint>joint_front_left_wheel</frontLeftJoint>
       <frontRightJoint>joint_front_right_wheel</frontRightJoint>
-      <frontAxleJoint>front_axle_joint</frontAxleJoint>
+    <!--  <frontAxleJoint>front_axle_joint</frontAxleJoint> -->
       <wheelSeparation>${base_y_origin_to_wheel_origin*2}</wheelSeparation>
       <wheelDiameter>${wheel_radius*2.0}</wheelDiameter>
       <torque>1000</torque>
@@ -35,7 +35,7 @@
   <gazebo>
     <plugin name="imu_controller" filename="libhector_gazebo_ros_imu.so">
       <robotNamespace>/</robotNamespace>
-      <updateRate>50.0</updateRate> 
+      <updateRate>50.0</updateRate>
       <bodyName>imu_link</bodyName>
       <frameId>base_link</frameId>
       <topicName>imu/data_compass</topicName>
@@ -57,10 +57,10 @@
     <turnGravityOff>false</turnGravityOff>
   </gazebo>
 
-  <gazebo reference="front_axle_link">
+<!--  <gazebo reference="front_axle_link">
     <material>Gazebo/DarkGrey</material>
     <turnGravityOff>false</turnGravityOff>
-  </gazebo>
+  </gazebo>-->
 
   <gazebo reference="fenders_link">
     <material>Gazebo/Yellow</material>

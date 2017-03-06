@@ -77,8 +77,6 @@ This program contains the description of the robot wheel model for Clearpath Gri
 
       <axis xyz="1 0 0"
             rpy="0 0 0" />
-      <limit effort="100"
-             velocity="100" />
       <joint_properties damping="0.0"
                         friction="0.0" />
     </joint>
