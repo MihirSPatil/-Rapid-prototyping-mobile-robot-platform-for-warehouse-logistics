@@ -75,18 +75,30 @@ void odomCallback(const std_msgs::String::ConstPtr & msg) {
   //-------------------- Convert enFL and enFR and enBL and enBR into Meters -------------
   int difFL = 0, difFR = 0, difBL = 0, difBR = 0;
 
-  if (enL != oldenL) {
-    difL = enL - oldenL;
-    oldenL = enL;
+  if (enFL != oldenFL) {
+    difFL = enFL - oldenFL;
+    oldenFL = enFL;
   }
 
-  if (enR != oldenR) {
-    difR = enR - oldenR;
-    oldenR = enR;
+  if (enFR != oldenFR) {
+    difFR = enFR - oldenFR;
+    oldenFR = enFR;
   }
 
-  double dl = (difL * wheelCircumference) / encoderResolution;
-  double dr = (difR * wheelCircumference) / encoderResolution;
+  if (enBL != oldenBL) {
+    difBL = enBL - oldenBL;
+    oldenBL = enBL;
+  }
+
+  if (enBR != oldenBR) {
+    difBR = enBR - oldenBR;
+    oldenBR = enBR;
+  }
+
+  double dFl = (difFL * wheelCircumference) / encoderResolution;
+  double dFr = (difFR * wheelCircumference) / encoderResolution;
+  double dBl = (difBL * wheelCircumference) / encoderResolution;
+  double dBr = (difBR * wheelCircumference) / encoderResolution;
 
   //ROS_INFO_STREAM("Left:" << dl << "\tRight:" << dr);
 
