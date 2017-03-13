@@ -164,12 +164,8 @@ This program contains the description of the robot base model for the Clearpath 
            velocity="0.5" />
   </joint>
 
-  <grizzly_wheel fr="front" lr="left" parent="front_axle_link"
-                 translateX="0" translateY="1" flipY="0" />
-  <grizzly_wheel fr="front" lr="right" parent="front_axle_link"
-                 translateX="0" translateY="-1" flipY="1" />
-  <grizzly_wheel fr="rear" lr="left" parent="chassis_link"
-                 translateX="-1" translateY="1" flipY="0" />
-  <grizzly_wheel fr="rear" lr="right" parent="chassis_link"
-                 translateX="-1" translateY="-1" flipY="1" />
+  <grizzly_wheel fr="front" lr="left" parent="front_axle_link" translateX="0" translateY="1" flipY="0" />
+  <grizzly_wheel fr="front" lr="right" parent="front_axle_link" translateX="0" translateY="-1" flipY="1" />
+  <grizzly_wheel fr="rear" lr="left" parent="chassis_link" translateX="-1" translateY="1" flipY="0" />
+  <grizzly_wheel fr="rear" lr="right" parent="chassis_link" translateX="-1" translateY="-1" flipY="1" />
 </robot>

@@ -38,7 +38,7 @@ This program contains the materials for the Clearpath Husky A200 model
     <color rgba="0.0 0.8 0.0 1.0" />
   </material>
   <material name="Grey">
-    <color rgba="0.3 0.3 0.3 1.0" />
+    <color rgba="0.3 0.3 0.3 0.8" />
   </material>
   <material name="DarkGrey">
     <color rgba="0.2 0.2 0.2 1.0" />
