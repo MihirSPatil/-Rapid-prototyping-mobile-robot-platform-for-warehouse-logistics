@@ -41,8 +41,8 @@ double vth = 0.0;
 
 double dx = 0, dy = 0, dth = 0;
 
-void algorithm1(double dl, double dr, double dt);
-void algorithm2(double dl, double dr, double dt);
+void algorithm1(double dFl, double dFr, double dt, double dBl, double dBr);
+void algorithm2(double dFl, double dFr, double dt, double dBl, double dBr);
 
 double string_to_double(const std::string& s) {
   std::istringstream i(s);
