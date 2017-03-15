@@ -11,21 +11,16 @@
 
 #define PI 3.1415926535897931
 
-int64_t enFL = 0;
-int64_t enFR = 0;
-int64_t enBL = 0;
-int64_t enBR = 0;
+int64_t enL = 0;
+int64_t enR = 0;
 
-int64_t oldenFL = 0;
-int64_t oldenFR = 0;
-int64_t oldenBL = 0;
-int64_t oldenBR = 0;
+int64_t oldenL = 0;
+int64_t oldenR = 0;
 
-double wheelCircumference = 0.638; //meters
-double wheelDistance = 0.44; //meters
+double wheelCircumference = 0.51; //meters
+double wheelDistance = 0.54; //meters
 
-
-uint8_t encoderResolution = 30;
+uint8_t encoderResolution = 180;
 
 ros::Time current_time, last_time;
 ros::Publisher odom_pub;
@@ -41,8 +36,8 @@ double vth = 0.0;
 
 double dx = 0, dy = 0, dth = 0;
 
-void algorithm1(double dFl, double dFr, double dt, double dBl, double dBr);
-void algorithm2(double dFl, double dFr, double dt, double dBl, double dBr);
+void algorithm1(double dl, double dr, double dt);
+void algorithm2(double dl, double dr, double dt);
 
 double string_to_double(const std::string& s) {
   std::istringstream i(s);
@@ -65,40 +60,26 @@ void odomCallback(const std_msgs::String::ConstPtr & msg) {
     in[i++] = token;
   }
 
-  enFL = -round(string_to_double(in[0]));
-  enFR = -round(string_to_double(in[1]));
-  enBL = -round(string_to_double(in[2]));
-  enBR = -round(string_to_double(in[3]));
+  enL = -round(string_to_double(in[0]));
+  enR = -round(string_to_double(in[1]));
 
   //ROS_INFO_STREAM("Left:" << enL << "\tRight:" << enR);
 
-  //-------------------- Convert enFL and enFR and enBL and enBR into Meters -------------
-  int difFL = 0, difFR = 0, difBL = 0, difBR = 0;
+  //-------------------- Convert enL and enR into Meters -------------
+  int difL = 0, difR = 0;
 
-  if (enFL != oldenFL) {
-    difFL = enFL - oldenFL;
-    oldenFL = enFL;
+  if (enL != oldenL) {
+    difL = enL - oldenL;
+    oldenL = enL;
   }
 
-  if (enFR != oldenFR) {
-    difFR = enFR - oldenFR;
-    oldenFR = enFR;
+  if (enR != oldenR) {
+    difR = enR - oldenR;
+    oldenR = enR;
   }
 
-  if (enBL != oldenBL) {
-    difBL = enBL - oldenBL;
-    oldenBL = enBL;
-  }
-
-  if (enBR != oldenBR) {
-    difBR = enBR - oldenBR;
-    oldenBR = enBR;
-  }
-
-  double dFl = (difFL * wheelCircumference) / encoderResolution;
-  double dFr = (difFR * wheelCircumference) / encoderResolution;
-  double dBl = (difBL * wheelCircumference) / encoderResolution;
-  double dBr = (difBR * wheelCircumference) / encoderResolution;
+  double dl = (difL * wheelCircumference) / encoderResolution;
+  double dr = (difR * wheelCircumference) / encoderResolution;
 
   //ROS_INFO_STREAM("Left:" << dl << "\tRight:" << dr);
 
