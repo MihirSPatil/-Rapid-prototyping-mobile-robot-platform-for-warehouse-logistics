@@ -7,7 +7,7 @@ project(agv_teleop)
 find_package(catkin REQUIRED COMPONENTS
 	roscpp
  	rospy
-  std_msgs
+  	std_msgs
 	geometry_msgs
 )
 
@@ -125,6 +125,7 @@ add_executable(teleop_latcher src/teleop_latcher.cpp)
 target_link_libraries(teleop_latcher
   ${catkin_LIBRARIES}
 )
+
 
 #############
 ## Install ##

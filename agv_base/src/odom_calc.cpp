@@ -17,10 +17,10 @@ int64_t enR = 0;
 int64_t oldenL = 0;
 int64_t oldenR = 0;
 
-double wheelCircumference = 0.51; //meters
-double wheelDistance = 0.54; //meters
+double wheelCircumference = 0.63; //meters
+double wheelDistance = 0.44; //meters
 
-uint8_t encoderResolution = 180;
+uint8_t encoderResolution = 30;
 
 ros::Time current_time, last_time;
 ros::Publisher odom_pub;
