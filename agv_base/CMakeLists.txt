@@ -9,7 +9,7 @@ find_package(catkin REQUIRED COMPONENTS
  	rospy
 	tf
 	grizzly_msgs
-  std_msgs
+  	std_msgs
 	geometry_msgs
 )
 
@@ -122,10 +122,10 @@ target_link_libraries(odom_temp
   ${catkin_LIBRARIES}
 )
 
-add_executable(odom_calc src/odom_calc.cpp)
-target_link_libraries(odom_calc
-  ${catkin_LIBRARIES}
-)
+##add_executable(odom_calc src/odom_calc.cpp)
+##target_link_libraries(odom_calc
+#  ${catkin_LIBRARIES}
+#)
 
 ## Declare a C++ library
 # add_library(agv_base

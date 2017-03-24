@@ -1,5 +1,9 @@
 <launch>
-  <node pkg="agv_base" type="odom_temp" name="odom_temp" output= "screen" />
-  <node pkg="agv_base" type="odom_calc" name="odom_calc"/>
-  <include file="$(find agv_gazebo)/launch/agv_empty_world.launch"/>
+  <node pkg="agv_base" type="odom_temp" name="odom_temp" />
+  <node pkg="rqt_graph" type="rqt_graph" name="rqt_graph" required="true"/>
+  <include file="$(find grizzly_motion)/launch/motion.launch">
+    <arg name="simulate" value="true" />
+  </include>
+  <include file="$(find agv_description)/launch/viz.launch"/>
+  <include file="$(find agv_teleop)/launch/teleop.launch"/>
 </launch>

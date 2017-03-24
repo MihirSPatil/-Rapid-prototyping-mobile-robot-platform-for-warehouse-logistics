@@ -1,8 +1,8 @@
 <launch>
   <rosparam>
     vehicle_width: 1.01      # meters
-    wheel_radius: 0.333      # meters
-    max_acceleration: 1.5    # meters / s^2
+    wheel_radius: 0.33      # meters
+    max_acceleration: 0.5    # meters / s^2
   </rosparam>
 
   <arg name="simulate" default="false" />
