@@ -96,6 +96,20 @@ This program contains the description of the robot base model for the Clearpath 
     </collision>
   </link>
 
+  <link name="base_frame">
+  <visual>
+    <geometry>
+      <sphere radius="0.02"/>
+    </geometry>
+    <material name="Red"/>
+  </visual>
+</link>
+<joint name="base_link_base_frame" type="fixed">
+  <origin xyz="${base_length/2} 0 0.3" rpy="0 0 0 "/>
+  <parent link="base_link"/>
+  <child link="base_frame"/>
+</joint>
+
   <!--Add a sensor anchor link that points to the center of the robot top plate-->
   <link name="rear_bottom_sensor_link" />
 
