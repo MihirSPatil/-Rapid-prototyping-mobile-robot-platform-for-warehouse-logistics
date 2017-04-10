@@ -1,5 +1,6 @@
 <launch>
-  <node pkg="agv_base" type="odom_temp" name="odom_temp" />
+  <!-- <node pkg="agv_base" type="odom_temp" name="odom_temp" /> -->
+  <node pkg="agv_base" type="odom_calc" name="odom_calc" />
   <node pkg="rqt_graph" type="rqt_graph" name="rqt_graph" required="true"/>
   <include file="$(find grizzly_motion)/launch/motion.launch">
     <arg name="simulate" value="true" />

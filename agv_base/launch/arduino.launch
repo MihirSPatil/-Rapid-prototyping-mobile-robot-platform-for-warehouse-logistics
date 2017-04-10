@@ -4,4 +4,5 @@
 
   <!-- Arduino -->
   <node name="serial_node" pkg="rosserial_python" type="serial_node.py" args="$(arg port)" respawn="true" />
+  <include file="$(find agv_base)/launch/odom.launch"/>
 </launch>

@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<launch>
+  <arg name="port" default="/dev/ttyACM0" />
+
+  <!-- Arduino -->
+  <node name="serial_node" pkg="rosserial_python" type="serial_node.py" args="$(arg port)" respawn="true" />
+
+  <node pkg="agv_base" type="odom_calc" name="odom_calc"/>
+
+  <node pkg="agv_base" type="odom_temp" name="odom_temp"/>
+
+  <node pkg="agv_base" type="imu_calc" name="imu_calc" output="screen"/>
+
+  <node pkg="rqt_graph" type="rqt_graph" name="rqt_graph" required="true"/>
+
+  <include file="$(find agv_description)/launch/viz.launch"/>
+
+</launch>
