@@ -3,6 +3,8 @@
 #include <std_msgs/String.h>
 #include <sensor_msgs/Imu.h>
 #include <sensor_msgs/MagneticField.h>
+#include <tf/transform_broadcaster.h>
+#include <geometry_msgs/TransformStamped.h>
 
 #include <iomanip>
 #include <iostream>
@@ -13,7 +15,8 @@
 ros::Time current_time, last_time;
 
 sensor_msgs::Imu imu_msg;
-sensor_msgs::MagneticField mag_msg;
+//sensor_msgs::MagneticField mag_msg;
+
 
 double string_to_double(const std::string& s) {
   std::istringstream i(s);
@@ -132,10 +135,17 @@ int main(int argc, char **argv) {
     imu_msg.header.stamp = ros::Time::now();
     imu_msg.header.frame_id = "chassis_link";
 
-    mag_msg.header = imu_msg.header;
+    //mag_msg.header = imu_msg.header;
 
     imu_pub.publish(imu_msg);
     //mag_pub.publish(mag_msg);
+    static tf::TransformBroadcaster imu_raw_tf_broadcaster;
+    //tf::Transform transform;
+    //transform.setOrigin(tf::Vector3(0.0, 0.0, 0.0) );
+    //tf::Quaternion(0, 0, 0, 1);
+    imu_raw_tf_broadcaster.sendTransform(tf::StampedTransform(tf::Transform(tf::Quaternion(0, 0, 0, 1), tf::Vector3(0.0, 0.0, 0.0)), ros::Time::now(), "imu_raw", "base_link"));
+    //ROS_INFO_STREAM("broadcasted, now sleeping");
+    imu_pub = n.advertise<sensor_msgs::Imu>("imu_raw", 50);
 
     rate.sleep();
   }
