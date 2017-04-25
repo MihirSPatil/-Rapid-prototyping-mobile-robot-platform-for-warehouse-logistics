@@ -3,11 +3,11 @@
   <arg name="port" default="/dev/ttyACM0" />
 
   <!-- Arduino -->
-  <node name="serial_node" pkg="rosserial_python" type="serial_node.py" args="$(arg port)" respawn="true" />
+  <!-- <node name="serial_node" pkg="rosserial_python" type="serial_node.py" args="$(arg port)" respawn="true" /> -->
 
   <node pkg="agv_base" type="odom_calc" name="odom_calc"/>
 
-  <node pkg="agv_base" type="odom_temp" name="odom_temp"/>
+  <include file="$(find agv_teleop)/launch/teleop.launch"/>
 
   <node pkg="agv_base" type="imu_calc" name="imu_calc" output="screen"/>
 

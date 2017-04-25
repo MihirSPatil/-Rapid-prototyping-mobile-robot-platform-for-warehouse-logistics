@@ -27,7 +27,7 @@ char imu_str[150];
 char odom_str[50];
 
 
-double linear, rotation,gain = 127;
+double linear, rotation,gain = 40;
 
 void TwistCb( const geometry_msgs::Twist & msg) {
   linear = msg.linear.x * gain;
@@ -54,7 +54,7 @@ void setup() {
   nh.advertise(pub_imu);
   nh.subscribe(sub);
 
-  /*pinMode(13, OUTPUT);
+  pinMode(13, OUTPUT);
 
   digitalWrite(13, HIGH);
   while (!mpu.begin(MPU6050_SCALE_2000DPS, MPU6050_RANGE_16G))
@@ -63,7 +63,7 @@ void setup() {
 
     }
 
-   digitalWrite(13, LOW);*/
+   digitalWrite(13, LOW);
 
 }
 
@@ -141,15 +141,15 @@ void loop() {
 
   if (rotation == 0) {
     if (linear > 0) {
-      digitalWrite(29, HIGH);
+      digitalWrite(29, LOW);
       digitalWrite(27, HIGH);
       digitalWrite(25, HIGH);
-      digitalWrite(22, HIGH);
+      digitalWrite(22, LOW);
     } else if (linear < 0) {
-      digitalWrite(29, LOW);
+      digitalWrite(29, HIGH);
       digitalWrite(27, LOW);
       digitalWrite(25, LOW);
-      digitalWrite(22, LOW);
+      digitalWrite(22, HIGH);
     }
   } else {
     if (rotation > 0) {
