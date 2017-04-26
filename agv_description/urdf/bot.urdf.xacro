@@ -144,12 +144,12 @@ This program contains the description of the robot base model for the Clearpath 
     <child link="front_top_sensor_link" />
   </joint>
   <link name="rear_bottom_sensor_link" /> -->
-<link name="imu_sensor_link"/>
+<!-- <link name="imu_sensor_link"/>
   <joint name="imu_sensor_link" type="fixed">
     <origin xyz="0 0 0"
             rpy="0 0 0" />
     <parent link="base_link" />
-    <child link="imu_sensor_link" />
-  </joint>
+    <child link="imu_sensor_link" /> -->
+  <!-- </joint> -->
 
 </robot>
