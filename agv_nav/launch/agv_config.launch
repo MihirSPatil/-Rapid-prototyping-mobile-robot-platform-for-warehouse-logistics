@@ -1,0 +1,13 @@
+<launch>
+  <node pkg="openni_camera" type="openni_node" name="camera_node">
+  </node>
+  <include file="$(find openni_launch)/launch/openni.launch"/>
+
+  <include file="$(find agv_base)/launch/hardware.launch"/>
+
+  <!-- <node pkg="agv_base" type="odom_calc" name="odom_calc">
+  </node>
+  <node pkg="agv_base" type="imu_calc" name="imu_calc">
+  </node> -->
+
+  </launch>

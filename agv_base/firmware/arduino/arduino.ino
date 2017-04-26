@@ -54,7 +54,7 @@ void setup() {
   nh.advertise(pub_imu);
   nh.subscribe(sub);
 
-  pinMode(13, OUTPUT);
+/*  pinMode(13, OUTPUT);
 
   digitalWrite(13, HIGH);
   while (!mpu.begin(MPU6050_SCALE_2000DPS, MPU6050_RANGE_16G))
@@ -63,7 +63,7 @@ void setup() {
 
     }
 
-   digitalWrite(13, LOW);
+   digitalWrite(13, LOW);*/
 
 }
 
@@ -95,7 +95,7 @@ void loop() {
 
 
 
-  Vector rawAccel = mpu.readRawAccel();
+  /*Vector rawAccel = mpu.readRawAccel();
   Vector normAccel = mpu.readNormalizeAccel();
     
     
@@ -124,7 +124,7 @@ void loop() {
   String s1 = String(acc_x) + "," + String(acc_y) + "," + String(acc_z) + "," + String(gyro_x) + "," + String(gyro_y) + "," + String(gyro_z);
   s1.toCharArray(imu_str, 150);
   imu_msg.data = imu_str;
-  pub_imu.publish(&imu_msg);
+  pub_imu.publish(&imu_msg);*/
 
 
   double mag = 0;
