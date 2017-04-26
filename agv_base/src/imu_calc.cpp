@@ -133,19 +133,19 @@ int main(int argc, char **argv) {
     ros::spinOnce();
 
     imu_msg.header.stamp = ros::Time::now();
-    imu_msg.header.frame_id = "chassis_link";
+    imu_msg.header.frame_id = "imu_sensor_link";
 
     //mag_msg.header = imu_msg.header;
 
     imu_pub.publish(imu_msg);
     //mag_pub.publish(mag_msg);
-    static tf::TransformBroadcaster imu_raw_tf_broadcaster;
-    //tf::Transform transform;
-    //transform.setOrigin(tf::Vector3(0.0, 0.0, 0.0) );
-    //tf::Quaternion(0, 0, 0, 1);
-    imu_raw_tf_broadcaster.sendTransform(tf::StampedTransform(tf::Transform(tf::Quaternion(0, 0, 0, 1), tf::Vector3(0.0, 0.0, 0.0)), ros::Time::now(), "imu_raw", "base_link"));
-    //ROS_INFO_STREAM("broadcasted, now sleeping");
-    imu_pub = n.advertise<sensor_msgs::Imu>("imu_raw", 50);
+    /*static tf::TransformBroadcaster imu_raw_tf_broadcaster;
+       //tf::Transform transform;
+       //transform.setOrigin(tf::Vector3(0.0, 0.0, 0.0) );
+       //tf::Quaternion(0, 0, 0, 1);
+       imu_raw_tf_broadcaster.sendTransform(tf::StampedTransform(tf::Transform(tf::Quaternion(0, 0, 0, 1), tf::Vector3(0.0, 0.0, 0.0)), ros::Time::now(), "imu_raw", "base_link"));
+       //ROS_INFO_STREAM("broadcasted, now sleeping");
+       imu_pub = n.advertise<sensor_msgs::Imu>("imu_raw", 50);*/
 
     rate.sleep();
   }
