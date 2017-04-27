@@ -3,7 +3,9 @@
 
   <!-- Run the map server -->
   <!-- <node name="map_server" pkg="map_server" type="map_server" args="$(find my_map_package)/my_map.pgm my_map_resolution"/> -->
-
+  <node name="octomap_server_node" pkg="octomap_server" type="octomap_server_node">
+     <remap from="/cloud_in" to="/camera/depth/points" />
+   </node>
   <!--- Run AMCL -->
   <include file="$(find amcl)/examples/amcl_diff.launch" />
 

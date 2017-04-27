@@ -1,0 +1,6 @@
+<launch>
+
+<include file="$(find agv_nav)/launch/agv_config.launch"/>
+<include file="$(find agv_nav)/launch/move_base.launch"/>
+
+</launch>

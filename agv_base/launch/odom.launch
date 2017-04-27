@@ -6,5 +6,5 @@
     <arg name="simulate" value="true" />
   </include>
   <include file="$(find agv_description)/launch/viz.launch"/>
-  <include file="$(find agv_teleop)/launch/teleop.launch"/>
+  <!-- <include file="$(find agv_teleop)/launch/teleop.launch"/> -->
 </launch>
